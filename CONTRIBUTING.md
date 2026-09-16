@@ -39,8 +39,8 @@ Before contributing code, please review our core architectural rules:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/shelf.git
-   cd shelf
+   git clone https://github.com/imrankhalid001/Shelf.git
+   cd Shelf
    ```
 2. Open the project root in Android Studio.
 3. Sync Gradle and build the project:

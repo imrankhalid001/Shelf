@@ -47,26 +47,26 @@ Shelf follows **Clean Architecture** and the **Repository Pattern**.
 ```mermaid
 graph TD
     subgraph "Native UI Layer"
-        AC[Android - Jetpack Compose]
-        IS[iOS - SwiftUI]
+        AC["Android - Jetpack Compose"]
+        IS["iOS - SwiftUI"]
     end
 
     subgraph "State / Presentation Layer"
-        AVM[Android ViewModels / StateFlow]
-        ISH[iOS StateHolders / Swift Observable]
+        AVM["Android ViewModels / StateFlow"]
+        ISH["iOS StateHolders / Swift Observable"]
     end
 
     subgraph "Shared Kotlin Domain Layer (commonMain)"
-        UC[Use Cases]
-        DM[Domain Models]
-        RC[Repository Contracts]
+        UC["Use Cases"]
+        DM["Domain Models"]
+        RC["Repository Contracts"]
     end
 
     subgraph "Shared Kotlin Data Layer (commonMain)"
-        RI[Repository Implementations]
-        RMDB[(Room KMP Database)]
-        KTOR[Ktor HTTP Client]
-        OLAPI[Open Library Remote API]
+        RI["Repository Implementations"]
+        RMDB[("Room KMP Database")]
+        KTOR["Ktor HTTP Client"]
+        OLAPI["Open Library Remote API"]
     end
 
     AC --> AVM
@@ -75,7 +75,7 @@ graph TD
     ISH --> UC
     UC --> DM
     UC --> RC
-    RC <|.. RI
+    RI -.-> RC
     RI --> RMDB
     RI --> KTOR
     KTOR --> OLAPI
@@ -180,8 +180,8 @@ Shelf/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/shelf.git
-   cd shelf
+   git clone https://github.com/imrankhalid001/Shelf.git
+   cd Shelf
    ```
 
 2. Build the shared module & run Android tests:
