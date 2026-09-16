@@ -204,14 +204,14 @@ Development is tracked through 23 structured milestones (Milestone 0 to Mileston
 - [x] **Milestone 0**: Product Definition & Spec
 - [x] **Milestone 1**: Architecture & Technical Docs
 - [x] **Milestone 2**: Design System & Tokens
-- [ ] **Milestone 3**: KMP Project Bootstrap & CI
-- [ ] **Milestone 4**: Core Shared Infrastructure
-- [ ] **Milestone 5**: Room KMP Database & DAOs
-- [ ] **Milestone 6**: Open Library API Client
-- [ ] **Milestone 7**: Repositories & Domain UseCases
-- [ ] **Milestone 8-9**: Android & iOS UI Foundations
-- [ ] **Milestone 10-18**: Feature Screens (Home, Search, Details, Library, Stats, etc.)
-- [ ] **Milestone 19-22**: Polish, Testing, Release Prep & Portfolio Showcase
+- [x] **Milestone 3**: KMP Project Bootstrap & CI
+- [x] **Milestone 4**: Core Shared Infrastructure
+- [x] **Milestone 5**: Room KMP Database & DAOs
+- [x] **Milestone 6**: Open Library API Client
+- [x] **Milestone 7**: Repositories & Domain UseCases
+- [x] **Milestone 8-9**: Android & iOS UI Foundations
+- [x] **Milestone 10-18**: Feature Screens (Home, Search, Details, Library, Stats, etc.)
+- [x] **Milestone 19-22**: Polish, Testing, Release Prep & Portfolio Showcase
 
 ---
 

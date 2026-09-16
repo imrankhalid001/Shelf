@@ -22,16 +22,16 @@
 
 ### Phase 1: MVP Core (Current Target)
 - [x] Complete architecture specification, design system, and documentation.
-- [ ] Shared KMP module with Room KMP, Ktor 3.x, and Clean Architecture Use Cases.
-- [ ] Native Android Jetpack Compose UI with Material 3 design tokens.
-- [ ] Native iOS SwiftUI UI with Apple Human Interface Guidelines styling.
-- [ ] Open Library search, book details, author info, and cover caching.
-- [ ] Library status management (`Want to Read`, `Reading`, `Finished`, `Paused`, `Dropped`).
-- [ ] Page reading progress tracking and reading session logger.
-- [ ] Yearly reading goal target setting and progress visualization.
-- [ ] Custom book collections and personal notes & quotes.
-- [ ] Local reading streak calculator and reading intelligence statistics.
-- [ ] On-device privacy-first recommendation engine.
+- [x] Shared KMP module with Room KMP, Ktor 3.x, and Clean Architecture Use Cases.
+- [x] Native Android Jetpack Compose UI with Material 3 design tokens.
+- [x] Native iOS SwiftUI UI with Apple Human Interface Guidelines styling.
+- [x] Open Library search, book details, author info, and cover caching.
+- [x] Library status management (`Want to Read`, `Reading`, `Finished`, `Paused`, `Dropped`).
+- [x] Page reading progress tracking and reading session logger.
+- [x] Yearly reading goal target setting and progress visualization.
+- [x] Custom book collections and personal notes & quotes.
+- [x] Local reading streak calculator and reading intelligence statistics.
+- [x] On-device privacy-first recommendation engine.
 
 ### Phase 2: Post-MVP Expansion (v1.5.0+)
 - [ ] **ISBN Barcode Scanner**: Camera-based barcode scanner (using CameraX on Android, DataScannerViewController on iOS) to instantly scan physical book covers/ISBN barcodes.
