@@ -1,0 +1,74 @@
+# Build outputs
+*.apk
+*.aab
+*.aar
+*.jar
+*.war
+*.ear
+*.rar
+*.zip
+*.tar.gz
+build/
+*/build/
+.gradle/
+**/build/
+**/bin/
+**/out/
+
+# IDE & Editor files
+.idea/
+!.idea/codeStyles/
+!.idea/copyright/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.vscode/
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# Local properties & environment configurations
+local.properties
+.env
+.env.local
+.env.*.local
+
+# Android & Gradle
+.navigation/
+captures/
+.externalNativeBuild
+.cxx/
+**/gdb.setup
+**/lldb.setup
+
+# iOS & Xcode
+**/iosApp/iosApp.xcodeproj/project.xcworkspace/
+**/iosApp/iosApp.xcodeproj/xcuserdata/
+**/iosApp/iosApp.xcworkspace/
+**/iosApp/DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+*.xcuserdata
+*.xccheckout
+*.mojo
+*.dSYM/
+*.moved-aside
+
+# Artifacts directory
+.artifacts/
