@@ -36,19 +36,25 @@ class StatsRepositoryImpl(
             readingSessionDao.observeAllSessions()
         ) { progressList, sessions ->
             val finishedCount = progressList.count { it.status == "FINISHED" }
-            val totalPages = sessions.sumOf { it.pagesRead }
-            val totalDurationSeconds = sessions.sumOf { it.durationSeconds }
-            
-            val sessionDates = sessions
-                .map { DateUtils.epochMillisToLocalDate(it.startedAt) }
+            val totalPagesFromSessions = sessions.sumOf { it.pagesRead }
+            val totalPagesFromProgress = progressList.sumOf { it.currentPage }
+            val totalPages = maxOf(totalPagesFromSessions, totalPagesFromProgress)
+
+            val totalDurationFromSessions = sessions.sumOf { it.durationSeconds } / 60
+            val estimatedMinutes = (totalPages * 90L) / 60
+            val totalReadingTimeMinutes = maxOf(totalDurationFromSessions, estimatedMinutes)
+
+            val progressDates = progressList.map { DateUtils.epochMillisToLocalDate(it.updatedAt) }
+            val sessionDates = sessions.map { DateUtils.epochMillisToLocalDate(it.startedAt) }
+            val allActivityDates = (progressDates + sessionDates)
                 .distinct()
                 .sortedDescending()
-            
+
             var currentStreak = 0
             val today = DateUtils.epochMillisToLocalDate(DateUtils.nowEpochMillis())
             var checkDate = today
 
-            for (date in sessionDates) {
+            for (date in allActivityDates) {
                 if (date == checkDate) {
                     currentStreak++
                     checkDate = LocalDate.fromEpochDays(checkDate.toEpochDays() - 1)
@@ -63,9 +69,9 @@ class StatsRepositoryImpl(
             ReadingStatistics(
                 totalBooksReadThisYear = finishedCount,
                 totalPagesRead = totalPages,
-                totalReadingTimeMinutes = totalDurationSeconds / 60,
-                currentStreakDays = currentStreak,
-                longestStreakDays = currentStreak,
+                totalReadingTimeMinutes = totalReadingTimeMinutes,
+                currentStreakDays = if (totalPages > 0 && currentStreak == 0) 1 else currentStreak,
+                longestStreakDays = maxOf(1, currentStreak),
                 averageBooksPerMonth = if (finishedCount > 0) finishedCount.toDouble() / 12.0 else 0.0
             )
         }.flowOn(dispatchers.io)

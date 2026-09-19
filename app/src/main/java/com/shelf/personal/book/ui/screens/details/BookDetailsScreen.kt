@@ -1,5 +1,7 @@
 package com.shelf.personal.book.ui.screens.details
 
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,13 +10,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoStories
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -31,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.shelf.core.result.AppResult
@@ -92,6 +100,7 @@ fun BookDetailsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BookDetailsContent(
     book: Book,
@@ -99,6 +108,8 @@ private fun BookDetailsContent(
     onStatusChange: (ReadingStatus) -> Unit,
     onProgressChange: (Int) -> Unit
 ) {
+    val uriHandler = LocalUriHandler.current
+
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
@@ -148,6 +159,25 @@ private fun BookDetailsContent(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Save to Library")
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Read / Borrow Free on Open Library Button
+            OutlinedButton(
+                onClick = {
+                    val openLibraryUrl = "https://openlibrary.org/works/${book.workId}"
+                    uriHandler.openUri(openLibraryUrl)
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AutoStories,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(text = "Read Free on Open Library 📖")
             }
         }
     }
@@ -202,24 +232,32 @@ private fun BookDetailsContent(
         color = MaterialTheme.colorScheme.onBackground
     )
     Spacer(modifier = Modifier.height(8.dp))
-    Row(modifier = Modifier.fillMaxWidth()) {
-        ReadingStatus.entries.take(3).forEach { status ->
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        ReadingStatus.entries.forEach { status ->
             val isSelected = currentProgress?.status == status
-            if (isSelected) {
-                Button(
-                    onClick = { onStatusChange(status) },
-                    modifier = Modifier.weight(1f).padding(horizontal = 2.dp)
-                ) {
-                    Text(text = status.name.replace("_", " "), style = MaterialTheme.typography.labelLarge)
-                }
-            } else {
-                OutlinedButton(
-                    onClick = { onStatusChange(status) },
-                    modifier = Modifier.weight(1f).padding(horizontal = 2.dp)
-                ) {
-                    Text(text = status.name.replace("_", " "), style = MaterialTheme.typography.labelLarge)
-                }
+            val labelText = when (status) {
+                ReadingStatus.WANT_TO_READ -> "To Read"
+                ReadingStatus.READING -> "Reading"
+                ReadingStatus.FINISHED -> "Finished"
+                ReadingStatus.PAUSED -> "Paused"
+                ReadingStatus.DROPPED -> "Dropped"
             }
+            FilterChip(
+                selected = isSelected,
+                onClick = { onStatusChange(status) },
+                label = {
+                    Text(
+                        text = labelText,
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+            )
         }
     }
 }

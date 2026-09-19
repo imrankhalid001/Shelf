@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 data class HomeUiState(
     val currentlyReadingBook: Book? = null,
     val recommendedBooks: List<Book> = emptyList(),
+    val libraryBooks: List<Book> = emptyList(),
     val statistics: ReadingStatistics = ReadingStatistics(),
     val isLoading: Boolean = true
 )
@@ -34,6 +35,7 @@ class HomeViewModel(
         HomeUiState(
             currentlyReadingBook = currentlyReading,
             recommendedBooks = recommendations,
+            libraryBooks = library,
             statistics = stats,
             isLoading = false
         )

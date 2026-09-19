@@ -36,6 +36,13 @@ fun SearchBookDocDto.toBookEntity(): BookEntity {
 }
 
 fun BookEntity.toDomain(progress: ReadingProgress? = null, isFavorite: Boolean = false): Book {
+    val effectivePageCount = if (pageCount > 0) {
+        pageCount
+    } else if ((progress?.totalPages ?: 0) > 0) {
+        progress!!.totalPages
+    } else {
+        100
+    }
     return Book(
         id = id,
         workId = workId,
@@ -45,7 +52,7 @@ fun BookEntity.toDomain(progress: ReadingProgress? = null, isFavorite: Boolean =
         coverId = coverId,
         coverUrl = coverUrl,
         firstPublishYear = firstPublishYear,
-        pageCount = pageCount,
+        pageCount = effectivePageCount,
         isbn10 = isbn10,
         isbn13 = isbn13,
         subjects = subjects.split(", ").filter { it.isNotBlank() },
