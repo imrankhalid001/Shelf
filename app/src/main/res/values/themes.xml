@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.Shelf" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Shelf.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#1A1918</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_shelf_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Shelf</item>
+    </style>
 </resources>

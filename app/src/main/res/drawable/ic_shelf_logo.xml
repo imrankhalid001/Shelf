@@ -5,6 +5,11 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
+    <!-- Outer Card Background -->
+    <path
+        android:fillColor="#1A1918"
+        android:pathData="M20,12h68a12,12 0,0 1,12 12v60a12,12 0,0 1,-12 12h-68a12,12 0,0 1,-12 -12v-60a12,12 0,0 1,12 -12z" />
+
     <!-- Open Book Left Page -->
     <path
         android:fillColor="#FDFBF7"

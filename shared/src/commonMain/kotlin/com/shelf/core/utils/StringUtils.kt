@@ -14,4 +14,12 @@ object StringUtils {
     fun extractOpenLibraryId(key: String): String {
         return key.removePrefix("/works/").removePrefix("/authors/").trim()
     }
+
+    fun formatReadingPace(pagesRead: Int, durationMinutes: Long): String {
+        if (durationMinutes <= 0 || pagesRead <= 0) return "0.0"
+        val pacePerHour = (pagesRead.toDouble() / durationMinutes.toDouble()) * 60.0
+        val integerPart = pacePerHour.toInt()
+        val decimalPart = ((pacePerHour - integerPart) * 10).toInt()
+        return "$integerPart.$decimalPart"
+    }
 }
